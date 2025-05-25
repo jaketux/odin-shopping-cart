@@ -18,7 +18,7 @@ export default function Main() {
       <div className="main-top-text">One click. Endless finds.</div>
       <div className="main-middle-section">
         <Link
-          to="/products"
+          to="/odin-shopping-cart/products"
           className="main-card"
           onClick={handleCategoryClick}
           style={{ textDecoration: "none", color: "inherit" }}
@@ -33,7 +33,7 @@ export default function Main() {
           <div className="main-card-text">Men's Clothing</div>
         </Link>
         <Link
-          to="/products"
+          to="/odin-shopping-cart/products"
           className="main-card"
           onClick={handleCategoryClick}
           style={{ textDecoration: "none", color: "inherit" }}
@@ -49,7 +49,7 @@ export default function Main() {
         </Link>
 
         <Link
-          to="/products"
+          to="/odin-shopping-cart/products"
           className="main-card"
           onClick={handleCategoryClick}
           style={{ textDecoration: "none", color: "inherit" }}
@@ -64,7 +64,7 @@ export default function Main() {
           <div className="main-card-text">Electronics</div>
         </Link>
         <Link
-          to="/products"
+          to="/odin-shopping-cart/products"
           className="main-card"
           onClick={handleCategoryClick}
           style={{ textDecoration: "none", color: "inherit" }}

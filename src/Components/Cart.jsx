@@ -90,7 +90,7 @@ export default function Cart() {
             />
           </div>
           <Link
-            to="/products"
+            to="/odin-shopping-cart/products"
             className="cart-title"
             style={{ textDecoration: "none", color: "inherit" }}
             onClick={() => handleProductClick(product.product)}
@@ -192,7 +192,7 @@ export default function Cart() {
               Your cart is empty. Click below to Continue Shopping.
             </div>
             <Link
-              to="/products"
+              to="/odin-shopping-cart/products"
               style={{ textDecoration: "none", color: "inherit" }}
             >
               <button

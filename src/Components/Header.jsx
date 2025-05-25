@@ -25,7 +25,7 @@ export default function Header(props) {
       </div>
       <div className="header-right">
         <Link
-          to="/main"
+          to="/odin-shopping-cart/main"
           className="header-home"
           onClick={handleChange}
           style={{ textDecoration: "none", color: "inherit" }}
@@ -33,7 +33,7 @@ export default function Header(props) {
           home
         </Link>
         <Link
-          to="/products"
+          to="/odin-shopping-cart/products"
           className="header-shop"
           onClick={handleChange}
           style={{ textDecoration: "none", color: "inherit" }}
@@ -41,7 +41,7 @@ export default function Header(props) {
           shop
         </Link>
         <Link
-          to="/cart"
+          to="/odin-shopping-cart/cart"
           className="header-shopping-cart"
           onClick={handleChange}
           style={{ textDecoration: "none", color: "inherit" }}

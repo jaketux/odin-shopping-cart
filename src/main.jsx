@@ -9,12 +9,13 @@ import Main from "/src/Components/Main.jsx";
 
 const router = createBrowserRouter([
   {
-    path: "/*",
+    path: "odin-shopping-cart/",
     element: <App />,
     children: [
-      { path: "main", element: <Main /> },
-      { path: "products", element: <Products /> },
-      { path: "cart", element: <Cart /> },
+      { index: true, element: <Main /> },
+      { path: "/odin-shopping-cart/main", element: <Main /> },
+      { path: "/odin-shopping-cart/products", element: <Products /> },
+      { path: "/odin-shopping-cart/cart", element: <Cart /> },
     ],
   },
 ]);
