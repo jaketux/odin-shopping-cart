@@ -115,47 +115,6 @@ function App() {
         totalCart={totalCart}
       />
       <Outlet context={context} />
-      {/* {screenFocus === "Main" && (
-        <Main
-          currentProdCat={currentProdCat}
-          setCurrentProdCat={setCurrentProdCat}
-          setScreenFocus={setScreenFocus}
-        />
-      )}
-      {screenFocus === "Products" && (
-        <Products
-          currentProdCat={currentProdCat}
-          setCurrentProdCat={setCurrentProdCat}
-          mensClothing={mensClothing}
-          womensClothing={womensClothing}
-          electronicsList={electronicsList}
-          jeweleryList={jeweleryList}
-          productInView={productInView}
-          setProductInView={setProductInView}
-          currentProductInView={currentProductInView}
-          setCurrentProductInView={setCurrentProductInView}
-          quantityOfItems={quantityOfItems}
-          setQuantityOfItems={setQuantityOfItems}
-          productCart={productCart}
-          setProductCart={setProductCart}
-          setTrolleyCount={setTrolleyCount}
-          setOrderTotal={setOrderTotal}
-        />
-      )}
-      {screenFocus === "Cart" && (
-        <Cart
-          productCart={productCart}
-          setProductCart={setProductCart}
-          trolleyCount={trolleyCount}
-          setTrolleyCount={setTrolleyCount}
-          totalCart={totalCart}
-          setCurrentProdCat={setCurrentProdCat}
-          setScreenFocus={setScreenFocus}
-          setProductInView={setProductInView}
-          setCurrentProductInView={setCurrentProductInView}
-        />
-      )} */}
-
       <Footer />
     </>
   );
