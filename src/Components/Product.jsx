@@ -15,6 +15,7 @@ export default function Product(props) {
 
   function handleChange(event) {
     const { value } = event.currentTarget;
+
     props.setQuantityOfItems(value);
   }
 

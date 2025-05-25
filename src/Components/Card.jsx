@@ -1,13 +1,17 @@
 import AddToCart from "/src/images/add-to-cart.png";
+import { useRef } from "react";
 
 export default function Card(props) {
+  const targetRef = useRef(null);
+
   function handleCardClick() {
     props.setCurrentProductInView(props.product);
     props.setProductInView(true);
+    window.scrollTo(0, 0);
   }
 
   return (
-    <div className="product-card" onClick={handleCardClick}>
+    <div ref={targetRef} className="product-card" onClick={handleCardClick}>
       <div className="product-card-top">
         <div className="product-image">
           <img
