@@ -2,18 +2,27 @@ import MensClothing from "/src/images/mensclothing.jpg";
 import WomensClothing from "/src/images/womensclothing.jpg";
 import Electronics from "/src/images/electronics.jpg";
 import Jewellery from "/src/images/jewellery.jpg";
+import { useOutletContext } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-export default function Main(props) {
+export default function Main() {
+  const { setCurrentProdCat, setScreenFocus } = useOutletContext();
+
   function handleCategoryClick(event) {
-    props.setCurrentProdCat(event.currentTarget.textContent);
-    props.setScreenFocus("Products");
+    setCurrentProdCat(event.currentTarget.textContent);
+    setScreenFocus("Products");
   }
 
   return (
     <div className="main">
       <div className="main-top-text">One click. Endless finds.</div>
       <div className="main-middle-section">
-        <div className="main-card" onClick={handleCategoryClick}>
+        <Link
+          to="/products"
+          className="main-card"
+          onClick={handleCategoryClick}
+          style={{ textDecoration: "none", color: "inherit" }}
+        >
           <div>
             <img
               src={MensClothing}
@@ -22,8 +31,13 @@ export default function Main(props) {
             />
           </div>
           <div className="main-card-text">Men's Clothing</div>
-        </div>
-        <div className="main-card" onClick={handleCategoryClick}>
+        </Link>
+        <Link
+          to="/products"
+          className="main-card"
+          onClick={handleCategoryClick}
+          style={{ textDecoration: "none", color: "inherit" }}
+        >
           <div>
             <img
               src={WomensClothing}
@@ -32,9 +46,14 @@ export default function Main(props) {
             />
           </div>
           <div className="main-card-text">Women's Clothing</div>
-        </div>
+        </Link>
 
-        <div className="main-card" onClick={handleCategoryClick}>
+        <Link
+          to="/products"
+          className="main-card"
+          onClick={handleCategoryClick}
+          style={{ textDecoration: "none", color: "inherit" }}
+        >
           <div>
             <img
               src={Electronics}
@@ -43,8 +62,13 @@ export default function Main(props) {
             />
           </div>
           <div className="main-card-text">Electronics</div>
-        </div>
-        <div className="main-card" onClick={handleCategoryClick}>
+        </Link>
+        <Link
+          to="/products"
+          className="main-card"
+          onClick={handleCategoryClick}
+          style={{ textDecoration: "none", color: "inherit" }}
+        >
           <div>
             <img
               src={Jewellery}
@@ -53,8 +77,8 @@ export default function Main(props) {
             />
           </div>
 
-          <div className="main-card-text">Jewellery</div>
-        </div>
+          <div className="main-card-text">Jewelery</div>
+        </Link>
       </div>
     </div>
   );

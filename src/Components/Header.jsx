@@ -1,4 +1,5 @@
 import ShoppingCart from "/src/images/shopping-cart.png";
+import { Link } from "react-router-dom";
 
 export default function Header(props) {
   function handleChange(event) {
@@ -23,13 +24,28 @@ export default function Header(props) {
         <h1 className="header-left-text">odinshop</h1>
       </div>
       <div className="header-right">
-        <div className="header-home" onClick={handleChange}>
+        <Link
+          to="/main"
+          className="header-home"
+          onClick={handleChange}
+          style={{ textDecoration: "none", color: "inherit" }}
+        >
           home
-        </div>
-        <div className="header-shop" onClick={handleChange}>
+        </Link>
+        <Link
+          to="/products"
+          className="header-shop"
+          onClick={handleChange}
+          style={{ textDecoration: "none", color: "inherit" }}
+        >
           shop
-        </div>
-        <div className="header-shopping-cart" onClick={handleChange}>
+        </Link>
+        <Link
+          to="/cart"
+          className="header-shopping-cart"
+          onClick={handleChange}
+          style={{ textDecoration: "none", color: "inherit" }}
+        >
           <img
             src={ShoppingCart}
             className="header-icon"
@@ -39,7 +55,7 @@ export default function Header(props) {
           <div className="trolley-count">{props.trolleyCount}</div>
 
           <div className="header-order-total">${props.totalCart}</div>
-        </div>
+        </Link>
       </div>
     </div>
   );

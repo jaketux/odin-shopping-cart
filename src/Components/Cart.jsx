@@ -2,17 +2,29 @@ import Add from "/src/images/add.png";
 import Minus from "/src/images/minus.png";
 import Arrow from "/src/images/right-arrow.png";
 import Bin from "/src/images/recycle-bin.png";
+import { useOutletContext } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-export default function Cart(props) {
+export default function Cart() {
+  const {
+    productCart,
+    setProductCart,
+    setScreenFocus,
+    setProductInView,
+    setCurrentProductInView,
+    setQuantityOfItems,
+    totalCart,
+  } = useOutletContext();
+
   function handleContinue() {
-    props.setProductInView(false);
-    props.setScreenFocus("Products");
-    props.setQuantityOfItems(0);
+    setProductInView(false);
+    setScreenFocus("Products");
+    setQuantityOfItems(0);
   }
 
   function handleDisplay() {
     function increaseQuantity(productId) {
-      props.setProductCart((prevCart) => {
+      setProductCart((prevCart) => {
         return prevCart.map((item) => {
           if (item.product.id === productId) {
             const newQuantity = item.quantity + 1;
@@ -24,7 +36,7 @@ export default function Cart(props) {
     }
 
     function decreaseQuantity(productId) {
-      props.setProductCart((prevCart) => {
+      setProductCart((prevCart) => {
         return prevCart.map((item) => {
           if (item.product.id === productId) {
             if (item.quantity > 0) {
@@ -41,7 +53,7 @@ export default function Cart(props) {
 
     function handleChange(event, productId) {
       const { value } = event.currentTarget;
-      props.setProductCart((prevCart) => {
+      setProductCart((prevCart) => {
         return prevCart.map((item) => {
           if (item.product.id === productId) {
             const newQuantity = parseInt(value, 10);
@@ -53,22 +65,22 @@ export default function Cart(props) {
     }
 
     function handleProductClick(product) {
-      props.setScreenFocus("Products");
-      props.setProductInView(true);
-      props.setCurrentProductInView(product);
+      setScreenFocus("Products");
+      setProductInView(true);
+      setCurrentProductInView(product);
     }
 
     function removeFromCart(product) {
-      const currentCart = props.productCart;
+      const currentCart = productCart;
       const filteredCart = currentCart.filter(
         (item) => item.product.id !== product
       );
 
-      props.setProductCart(filteredCart);
+      setProductCart(filteredCart);
     }
 
-    if (props.productCart.length >= 1) {
-      return props.productCart.map((product, index) => (
+    if (productCart.length >= 1) {
+      return productCart.map((product, index) => (
         <div key={index} product={product} className="cart-product">
           <div className="cart-img">
             <img
@@ -77,12 +89,14 @@ export default function Cart(props) {
               alt="product image"
             />
           </div>
-          <div
+          <Link
+            to="/products"
             className="cart-title"
+            style={{ textDecoration: "none", color: "inherit" }}
             onClick={() => handleProductClick(product.product)}
           >
             {product.product.title}
-          </div>
+          </Link>
           <div className="cart-quantity">
             <div className="quantity-tool">
               <div className="decrease">
@@ -129,7 +143,7 @@ export default function Cart(props) {
   return (
     <div className="cart-section">
       <div className="cart-heading">Shopping Cart</div>
-      {props.productCart.length >= 1 && (
+      {productCart.length >= 1 && (
         <>
           <div className="cart-main">
             <div className="cart-left-side">
@@ -141,7 +155,7 @@ export default function Cart(props) {
               <div className="summary-heading">Order Summary</div>
               <div className="summary-subheading">
                 <div className="summary-price">Original price</div>
-                <div className="dollars">${props.totalCart}</div>
+                <div className="dollars">${totalCart}</div>
               </div>
               <div className="summary-subheading">
                 <div className="summary-savings">Savings</div>
@@ -153,7 +167,7 @@ export default function Cart(props) {
               </div>
               <div className="summary-total">
                 <div className="total">Total</div>
-                <div className="total-dollars">${props.totalCart}</div>
+                <div className="total-dollars">${totalCart}</div>
               </div>
               <div className="checkout">
                 <button className="checkout-btn" type="button">
@@ -171,19 +185,24 @@ export default function Cart(props) {
           </div>
         </>
       )}
-      {props.productCart.length === 0 && (
+      {productCart.length === 0 && (
         <>
           <div className="empty-cart">
             <div className="empty-cart-text">
               Your cart is empty. Click below to Continue Shopping.
             </div>
-            <button
-              className="checkout-btn"
-              type="button"
-              onClick={handleContinue}
+            <Link
+              to="/products"
+              style={{ textDecoration: "none", color: "inherit" }}
             >
-              Continue Shopping
-            </button>
+              <button
+                className="checkout-btn"
+                type="button"
+                onClick={handleContinue}
+              >
+                Continue Shopping
+              </button>
+            </Link>
           </div>
         </>
       )}

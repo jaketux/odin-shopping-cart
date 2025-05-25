@@ -1,47 +1,65 @@
 import Card from "./Card";
 import Product from "./Product";
+import { useOutletContext } from "react-router-dom";
 
-export default function Products(props) {
+export default function Products() {
+  const {
+    currentProdCat,
+    setCurrentProdCat,
+    mensClothing,
+    womensClothing,
+    electronicsList,
+    jeweleryList,
+    productInView,
+    setProductInView,
+    currentProductInView,
+    setCurrentProductInView,
+    quantityOfItems,
+    setQuantityOfItems,
+    productCart,
+    setProductCart,
+  } = useOutletContext();
+
   function handleCategoryClick(event) {
-    props.setProductInView(false);
-    props.setCurrentProdCat(event.currentTarget.textContent);
-    props.setQuantityOfItems(0);
+    setProductInView(false);
+    setCurrentProdCat(event.currentTarget.textContent);
+    setQuantityOfItems(0);
   }
 
   function handleDisplay() {
     let productList = [];
 
-    if (props.currentProdCat === "Men's Clothing") {
-      productList = props.mensClothing;
-    } else if (props.currentProdCat === "Women's Clothing") {
-      productList = props.womensClothing;
-    } else if (props.currentProdCat === "Electronics") {
-      productList = props.electronicsList;
-    } else if (props.currentProdCat === "Jewelery") {
-      productList = props.jeweleryList;
+    if (currentProdCat === "Men's Clothing") {
+      productList = mensClothing;
+    } else if (currentProdCat === "Women's Clothing") {
+      productList = womensClothing;
+    } else if (currentProdCat === "Electronics") {
+      productList = electronicsList;
+    } else if (currentProdCat === "Jewelery") {
+      productList = jeweleryList;
     }
 
-    if (!props.productInView) {
+    if (!productInView) {
       return productList.map((product, index) => (
         <Card
           key={index}
           product={product}
           className="product-card"
-          productInView={props.productInView}
-          setProductInView={props.setProductInView}
-          currentProductInView={props.currentProductInView}
-          setCurrentProductInView={props.setCurrentProductInView}
+          productInView={productInView}
+          setProductInView={setProductInView}
+          currentProductInView={currentProductInView}
+          setCurrentProductInView={setCurrentProductInView}
         />
       ));
     } else {
       return (
         <Product
-          currentProductInView={props.currentProductInView}
-          setProductInView={props.setProductInView}
-          quantityOfItems={props.quantityOfItems}
-          setQuantityOfItems={props.setQuantityOfItems}
-          setProductCart={props.setProductCart}
-          productCart={props.productCart}
+          currentProductInView={currentProductInView}
+          setProductInView={setProductInView}
+          quantityOfItems={quantityOfItems}
+          setQuantityOfItems={setQuantityOfItems}
+          setProductCart={setProductCart}
+          productCart={productCart}
         />
       );
     }
@@ -69,18 +87,13 @@ export default function Products(props) {
         </div>
       </div>
       <div className="products-right-side">
-        {props.productInView ? (
-          <div className="products-heading-right">
-            {props.currentProductInView.title}
-          </div>
-        ) : (
-          <div className="products-heading-right">{props.currentProdCat} </div>
-        )}
-        {props.productInView ? (
-          <div className="products-full">{handleDisplay()}</div>
-        ) : (
-          <div className="products-grid">{handleDisplay()}</div>
-        )}
+        <div className="products-heading-right">
+          {productInView ? currentProductInView.title : currentProdCat}
+        </div>
+
+        <div className={productInView ? "products-full" : "products-grid"}>
+          {handleDisplay()}
+        </div>
       </div>
     </div>
   );

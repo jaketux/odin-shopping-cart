@@ -5,6 +5,7 @@ import Header from "./Components/Header";
 import Main from "./Components/Main";
 import Products from "./Components/Products";
 import Cart from "./Components/Cart";
+import { Outlet, useOutletContext } from "react-router-dom";
 
 import Footer from "./Components/Footer";
 
@@ -76,6 +77,34 @@ function App() {
       });
   }, []);
 
+  const context = {
+    currentProdCat,
+    setCurrentProdCat,
+    screenFocus,
+    setScreenFocus,
+    mensClothing,
+    setMensClothing,
+    womensClothing,
+    setWomensClothing,
+    electronicsList,
+    setElectronics,
+    jeweleryList,
+    setJewelery,
+    productInView,
+    setProductInView,
+    currentProductInView,
+    setCurrentProductInView,
+    quantityOfItems,
+    setQuantityOfItems,
+    productCart,
+    setProductCart,
+    trolleyCount,
+    setTrolleyCount,
+    orderTotal,
+    setOrderTotal,
+    totalCart,
+  };
+
   return (
     <>
       <Header
@@ -85,7 +114,8 @@ function App() {
         setProductInView={setProductInView}
         totalCart={totalCart}
       />
-      {screenFocus === "Main" && (
+      <Outlet context={context} />
+      {/* {screenFocus === "Main" && (
         <Main
           currentProdCat={currentProdCat}
           setCurrentProdCat={setCurrentProdCat}
@@ -124,7 +154,7 @@ function App() {
           setProductInView={setProductInView}
           setCurrentProductInView={setCurrentProductInView}
         />
-      )}
+      )} */}
 
       <Footer />
     </>

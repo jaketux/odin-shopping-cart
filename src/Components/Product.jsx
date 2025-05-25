@@ -1,28 +1,37 @@
 import Add from "/src/images/add.png";
 import Minus from "/src/images/minus.png";
 import AddToCart from "/src/images/add-to-cart.png";
+import { useOutletContext } from "react-router-dom";
 
-export default function Product(props) {
+export default function Product() {
+  const {
+    currentProductInView,
+    quantityOfItems,
+    setQuantityOfItems,
+    setProductCart,
+    productCart,
+  } = useOutletContext();
+
   function increaseQuantity() {
-    props.setQuantityOfItems((prevQuantity) => prevQuantity + 1);
+    setQuantityOfItems((prevQuantity) => prevQuantity + 1);
   }
 
   function reduceQuantity() {
-    if (props.quantityOfItems >= 1) {
-      props.setQuantityOfItems((prevQuantity) => prevQuantity - 1);
+    if (quantityOfItems >= 1) {
+      setQuantityOfItems((prevQuantity) => prevQuantity - 1);
     }
   }
 
   function handleChange(event) {
     const { value } = event.currentTarget;
 
-    props.setQuantityOfItems(value);
+    setQuantityOfItems(value);
   }
 
   function addToCart() {
-    if (props.quantityOfItems > 0) {
-      props.setProductCart((prevCart) => {
-        const productId = props.currentProductInView.id;
+    if (quantityOfItems > 0) {
+      setProductCart((prevCart) => {
+        const productId = currentProductInView.id;
         const existingProductIndex = prevCart.findIndex(
           (item) => item.product.id === productId
         );
@@ -33,8 +42,7 @@ export default function Product(props) {
           updatedCart[existingProductIndex] = {
             ...updatedCart[existingProductIndex],
             quantity:
-              updatedCart[existingProductIndex].quantity +
-              props.quantityOfItems,
+              updatedCart[existingProductIndex].quantity + quantityOfItems,
           };
 
           return updatedCart;
@@ -42,22 +50,22 @@ export default function Product(props) {
           return [
             ...prevCart,
             {
-              product: props.currentProductInView,
-              quantity: props.quantityOfItems,
+              product: currentProductInView,
+              quantity: quantityOfItems,
             },
           ];
         }
       });
     }
-    props.setQuantityOfItems(0);
-    console.log([props.productCart]);
+    setQuantityOfItems(0);
+    console.log([productCart]);
   }
 
   return (
     <div className="product-description-card">
       <div className="product-left-side">
         <img
-          src={props.currentProductInView.image}
+          src={currentProductInView.image}
           alt="product image"
           className="product-img-large"
         />
@@ -65,10 +73,10 @@ export default function Product(props) {
       <div className="product-right-side">
         <div className="right-side-top">
           <div className="product-description">
-            {props.currentProductInView.description}
+            {currentProductInView.description}
           </div>
           <div className="product-price">
-            ${parseFloat(props.currentProductInView.price).toFixed(2)}
+            ${parseFloat(currentProductInView.price).toFixed(2)}
           </div>
         </div>
         <div className="right-side-bottom">
@@ -84,7 +92,7 @@ export default function Product(props) {
             <input
               type="number"
               name="quantity"
-              value={props.quantityOfItems}
+              value={quantityOfItems}
               onChange={handleChange}
               className="quantity-input"
             />
